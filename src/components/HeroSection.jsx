@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Chatbot from './Chatbot';
+import CashflowSupplyChain from './CashflowSupplyChain';
 
 const HeroSection = () => {
   const [websiteUrl, setWebsiteUrl] = useState('');
-  const [currentPhase, setCurrentPhase] = useState('input'); // 'input', 'loading', 'options', 'site-loading', 'embedded-setup'
+  const [currentPhase, setCurrentPhase] = useState('input'); // 'input', 'loading', 'options', 'site-loading', 'embedded-setup', 'cashflow-management'
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleTryNEXA = () => {
@@ -36,8 +37,10 @@ const HeroSection = () => {
       setTimeout(() => {
         setCurrentPhase('embedded-setup');
       }, 3000); // 3 seconds site loading time
+    } else if (option === 'cashflow-management') {
+      // Go directly to cashflow management
+      setCurrentPhase('cashflow-management');
     }
-    // Add logic for other options here
   };
 
   const resetToInput = () => {
@@ -322,6 +325,16 @@ const HeroSection = () => {
         return null;
     }
   };
+
+  // Special case for cashflow management - render without wrapper
+  if (currentPhase === 'cashflow-management') {
+    return (
+      <CashflowSupplyChain 
+        websiteUrl={websiteUrl}
+        onBack={() => setCurrentPhase('options')}
+      />
+    );
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#667eea] to-[#764ba2] p-8 font-sans">
