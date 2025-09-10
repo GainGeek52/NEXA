@@ -3,7 +3,7 @@ import Chatbot from './Chatbot';
 
 const HeroSection = () => {
   const [websiteUrl, setWebsiteUrl] = useState('');
-  const [currentPhase, setCurrentPhase] = useState('input'); // 'input', 'loading', 'learning', 'chatbot'
+  const [currentPhase, setCurrentPhase] = useState('input'); // 'input', 'loading', 'learning', 'chatbot', 'embedded-details'
   const [selectedOption, setSelectedOption] = useState('');
   const [learningProgress, setLearningProgress] = useState(0);
 
@@ -41,7 +41,13 @@ const HeroSection = () => {
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     console.log('Selected option:', option);
-    // Add logic for handling the selected option
+    
+    if (option === 'embedded-chatbot') {
+      setCurrentPhase('embedded-details');
+    } else if (option === 'cashflow-management') {
+      // Handle cashflow management option - you can add logic here later
+      console.log('Cashflow management selected');
+    }
   };
 
   const resetToInput = () => {
@@ -198,6 +204,71 @@ const HeroSection = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        );
+
+      case 'embedded-details':
+        return (
+          <div className="col-span-2 flex items-center justify-center min-h-[600px] bg-gradient-to-br from-[#8B5CF6] to-[#A855F7] p-8">
+            <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-12 max-w-md w-full text-center shadow-2xl">
+              {/* Robot Icon */}
+              <div className="mb-8 flex justify-center">
+                <div className="relative">
+                  {/* Robot head */}
+                  <div className="w-20 h-20 bg-gradient-to-b from-orange-200 to-orange-300 rounded-2xl flex items-center justify-center border-4 border-red-400 relative">
+                    {/* Eyes */}
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                      <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                    </div>
+                    {/* Mouth */}
+                    <div className="absolute bottom-2 w-4 h-1 bg-gray-600 rounded"></div>
+                  </div>
+                  {/* Antennas */}
+                  <div className="absolute -top-2 left-2 w-1 h-6 bg-red-400 rounded"></div>
+                  <div className="absolute -top-2 right-2 w-1 h-6 bg-red-400 rounded"></div>
+                  {/* Antenna tops */}
+                  <div className="absolute -top-4 left-1.5 w-2 h-2 bg-orange-400 rounded-full"></div>
+                  <div className="absolute -top-4 right-1.5 w-2 h-2 bg-orange-400 rounded-full"></div>
+                </div>
+              </div>
+
+              {/* Title */}
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">Embedded Chatbot</h2>
+              
+              {/* Description */}
+              <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                Add an intelligent chatbot directly to your website. Instantly answer visitor questions using your site's content.
+              </p>
+              
+              {/* Features */}
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center justify-start text-gray-700">
+                  <span className="text-green-500 mr-3 text-lg">✓</span>
+                  <span>Easy one-line integration</span>
+                </div>
+                <div className="flex items-center justify-start text-gray-700">
+                  <span className="text-green-500 mr-3 text-lg">✓</span>
+                  <span>Learns from your website</span>
+                </div>
+                <div className="flex items-center justify-start text-gray-700">
+                  <span className="text-green-500 mr-3 text-lg">✓</span>
+                  <span>24/7 customer support</span>
+                </div>
+                <div className="flex items-center justify-start text-gray-700">
+                  <span className="text-green-500 mr-3 text-lg">✓</span>
+                  <span>No training required</span>
+                </div>
+              </div>
+
+              {/* Back button */}
+              <button
+                onClick={resetToInput}
+                className="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold hover:from-purple-600 hover:to-purple-700 transition-all duration-200 shadow-lg"
+              >
+                Get Started
+              </button>
             </div>
           </div>
         );
