@@ -1,8 +1,28 @@
 import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import LogoAnimation from './LogoAnimation';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
+  const handleSignup = () => {
+    navigate('/signup');
+  };
+
+  const handleNavClick = (section) => {
+    // If we're not on the home page, navigate there first
+    if (location.pathname !== '/') {
+      navigate('/');
+    }
+    // You can add scroll behavior here if needed
+    setIsMenuOpen(false);
+  };
 
   return (
     <nav className="bg-gradient-to-r from-purple-700 to-indigo-800 shadow-lg">
@@ -52,10 +72,16 @@ const Navbar = () => {
           {/* Auth Buttons */}
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6 space-x-4">
-              <button className="text-black hover:text-black px-3 py-2 rounded-md text-sm font-medium transition duration-150">
+              <button 
+                onClick={handleLogin}
+                className="text-black hover:text-black px-3 py-2 rounded-md text-sm font-medium transition duration-150"
+              >
                 Login
               </button>
-              <button className="bg-indigo-600 hover:bg-indigo-500 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-150">
+              <button 
+                onClick={handleSignup}
+                className="bg-indigo-600 hover:bg-indigo-500 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-150"
+              >
                 Sign Up for Free
               </button>
             </div>
@@ -124,10 +150,16 @@ const Navbar = () => {
               EmbedGuide
             </a>
             <div className="pt-4 pb-3 border-t border-indigo-700">
-              <button className="w-full text-left text-black hover:text-black block px-3 py-2 rounded-md text-base font-medium">
+              <button 
+                onClick={handleLogin}
+                className="w-full text-left text-black hover:text-black block px-3 py-2 rounded-md text-base font-medium"
+              >
                 Login
               </button>
-              <button className="w-full mt-2 bg-indigo-600 hover:bg-indigo-500 text-black block px-3 py-2 rounded-md text-base font-medium">
+              <button 
+                onClick={handleSignup}
+                className="w-full mt-2 bg-indigo-600 hover:bg-indigo-500 text-black block px-3 py-2 rounded-md text-base font-medium"
+              >
                 Sign Up for Free
               </button>
             </div>
