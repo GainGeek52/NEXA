@@ -307,7 +307,10 @@ const HeroSection = () => {
               </div>
               
               <div className="flex justify-center space-x-4 mt-8">
-                <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                <button 
+                  onClick={() => setCurrentPhase('signup')}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                >
                   Continue to Sign Up →
                 </button>
                 <button 
