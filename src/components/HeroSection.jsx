@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Chatbot from './Chatbot';
 import CashflowSupplyChain from './CashflowSupplyChain';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [websiteUrl, setWebsiteUrl] = useState('');
-  const [currentPhase, setCurrentPhase] = useState('input'); // 'input', 'loading', 'options', 'site-loading', 'embedded-setup', 'cashflow-management'
+  const [currentPhase, setCurrentPhase] = useState('input'); // 'input', 'loading', 'options', 'site-loading', 'embedded-setup', 'cashflow-management', 'signup', 'get-code'
   const [selectedOption, setSelectedOption] = useState('');
+
+  // Check URL params for direct navigation
+  React.useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const option = params.get('option');
+    if (option) {
+      setCurrentPhase('options');
+      setTimeout(() => handleOptionSelect(option), 100);
+    }
+  }, [location]);
 
   const handleTryNEXA = () => {
     if (websiteUrl.trim()) {
@@ -318,6 +331,155 @@ const HeroSection = () => {
                   className="border border-white/50 text-white px-6 py-3 rounded-lg hover:bg-white/10 transition-colors"
                 >
                   ← Back to Options
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'signup':
+        return (
+          <div className="col-span-2 w-full">
+            {/* Navbar with URL */}
+            <div className="bg-black text-white p-4 rounded-lg mb-8">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2 bg-gray-800 px-3 py-1 rounded">
+                  <span className="text-gray-400">🌐</span>
+                  <span className="text-white">{websiteUrl}</span>
+                </div>
+                <button 
+                  onClick={() => setCurrentPhase('embedded-setup')}
+                  className="text-gray-400 hover:text-white"
+                >
+                  ← Back
+                </button>
+              </div>
+            </div>
+
+            {/* Progress Bar - Step 2 Active */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 mb-8">
+              <div className="flex items-center justify-between relative">
+                <div className="absolute top-6 left-0 right-0 h-1 bg-gray-600 rounded">
+                  <div className="h-full bg-blue-500 rounded w-2/3 transition-all duration-500"></div>
+                </div>
+                
+                <div className="flex flex-col items-center z-10">
+                  <div className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mb-2">
+                    ✓
+                  </div>
+                  <span className="text-green-300 font-medium">Preview</span>
+                </div>
+                
+                <div className="flex flex-col items-center z-10">
+                  <div className="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mb-2">
+                    2
+                  </div>
+                  <span className="text-white font-medium">Sign Up</span>
+                </div>
+                
+                <div className="flex flex-col items-center z-10">
+                  <div className="w-12 h-12 bg-gray-500 text-white rounded-full flex items-center justify-center font-bold mb-2">
+                    3
+                  </div>
+                  <span className="text-gray-300">Get Your Code</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Sign Up Form */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8 text-white">
+              <h3 className="text-2xl font-bold mb-4">Create Your NEXA AI Account</h3>
+              <p className="text-white/80 mb-6">
+                Sign up to get your chatbot embed code and start helping your website visitors.
+              </p>
+
+              <div className="flex justify-center space-x-4 mt-8">
+                <button 
+                  onClick={() => navigate('/signup')}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold transition-colors text-lg"
+                >
+                  Create Account →
+                </button>
+                <button 
+                  onClick={() => navigate('/login')}
+                  className="border border-white/50 text-white px-8 py-4 rounded-lg hover:bg-white/10 transition-colors text-lg"
+                >
+                  Already have an account? Sign In
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'get-code':
+        return (
+          <div className="col-span-2 w-full">
+            {/* Navbar with URL */}
+            <div className="bg-black text-white p-4 rounded-lg mb-8">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2 bg-gray-800 px-3 py-1 rounded">
+                  <span className="text-gray-400">🌐</span>
+                  <span className="text-white">{websiteUrl}</span>
+                </div>
+                <button 
+                  onClick={resetToInput}
+                  className="text-gray-400 hover:text-white"
+                >
+                  ← Back to Home
+                </button>
+              </div>
+            </div>
+
+            {/* Progress Bar - All Steps Complete */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 mb-8">
+              <div className="flex items-center justify-between relative">
+                <div className="absolute top-6 left-0 right-0 h-1 bg-green-500 rounded transition-all duration-500"></div>
+                
+                <div className="flex flex-col items-center z-10">
+                  <div className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mb-2">
+                    ✓
+                  </div>
+                  <span className="text-green-300 font-medium">Preview</span>
+                </div>
+                
+                <div className="flex flex-col items-center z-10">
+                  <div className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mb-2">
+                    ✓
+                  </div>
+                  <span className="text-green-300 font-medium">Sign Up</span>
+                </div>
+                
+                <div className="flex flex-col items-center z-10">
+                  <div className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mb-2">
+                    ✓
+                  </div>
+                  <span className="text-green-300 font-medium">Get Your Code</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Embed Code */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8 text-white">
+              <h3 className="text-2xl font-bold mb-4">🎉 Your Chatbot is Ready!</h3>
+              <p className="text-white/80 mb-6">
+                Copy the embed code below and paste it into your website's HTML. Your NEXA AI chatbot will be live immediately!
+              </p>
+
+              <div className="bg-black rounded-lg p-6 mb-6">
+                <code className="text-green-400 font-mono text-sm block">
+                  {`<!-- NEXA AI Chatbot for ${websiteUrl} -->\n<script\n  src="https://cdn.nexa-ai.com/embed.js"\n  data-website="${websiteUrl}"\n  data-chatbot-id="nx_${websiteUrl.replace(/[^a-zA-Z0-9]/g, '_')}"\n  async\n></script>`}
+                </code>
+              </div>
+
+              <div className="flex justify-center space-x-4">
+                <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                  Copy Code
+                </button>
+                <button 
+                  onClick={() => navigate('/dashboard')}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                >
+                  Go to Dashboard
                 </button>
               </div>
             </div>
