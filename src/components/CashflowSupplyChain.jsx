@@ -158,15 +158,16 @@ const CashflowSupplyChain = ({ websiteUrl, onBack }) => {
             <h3 className="text-xl font-semibold text-white mb-2">Drop your files here</h3>
             <p className="text-white/70 mb-4">Supports CSV, Excel, and other spreadsheet formats</p>
             <div className="flex justify-center space-x-4">
-              <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+              <Button color="blue" size="lg">
                 Choose Files
-              </button>
-              <button 
+              </Button>
+              <Button 
+                color="green" 
+                size="lg"
                 onClick={handleDataImport}
-                className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
               >
                 Use Sample Data
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -216,12 +217,13 @@ const CashflowSupplyChain = ({ websiteUrl, onBack }) => {
         </div>
 
         <div className="text-center mt-8">
-          <button 
+          <Button 
             onClick={onBack}
-            className="border border-white/50 text-white px-6 py-3 rounded-lg hover:bg-white/10 transition-colors"
+            outline={true}
+            color="light"
           >
             ← Back to Options
-          </button>
+          </Button>
         </div>
       </div>
     </div>
@@ -387,13 +389,14 @@ const CashflowSupplyChain = ({ websiteUrl, onBack }) => {
                     className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
-                <button
+                <Button
                   type="submit"
-                  className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center"
+                  color="blue"
+                  className="w-full flex items-center justify-center"
                 >
                   <Plus size={16} className="mr-2" />
                   Add Expense
-                </button>
+                </Button>
               </form>
 
               <div className="space-y-3">
@@ -444,13 +447,14 @@ const CashflowSupplyChain = ({ websiteUrl, onBack }) => {
                   <option value="Paid">Paid</option>
                   <option value="Unpaid">Unpaid</option>
                 </select>
-                <button
+                <Button
                   type="submit"
-                  className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors flex items-center justify-center"
+                  color="green"
+                  className="w-full flex items-center justify-center"
                 >
                   <Plus size={16} className="mr-2" />
                   Add Invoice
-                </button>
+                </Button>
               </form>
 
               <div className="space-y-3">
@@ -705,13 +709,14 @@ const CashflowSupplyChain = ({ websiteUrl, onBack }) => {
                     <option value="Delayed">Delayed</option>
                     <option value="Pending">Pending</option>
                   </select>
-                  <button
+                  <Button
                     type="submit"
-                    className="w-full bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition-colors flex items-center justify-center"
+                    color="warning"
+                    className="w-full flex items-center justify-center"
                   >
                     <Plus size={16} className="mr-2" />
                     Add Supply Order
-                  </button>
+                  </Button>
                 </form>
               </div>
 
