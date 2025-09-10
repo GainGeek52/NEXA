@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Chatbot from './chatbot';
+import Chatbot from './Chatbot';
 
 const HeroSection = () => {
   const [websiteUrl, setWebsiteUrl] = useState('');
