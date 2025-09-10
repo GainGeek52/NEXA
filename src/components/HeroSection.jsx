@@ -208,12 +208,9 @@ const HeroSection = () => {
             {/* New Navbar with URL */}
             <div className="bg-black text-white p-4 rounded-lg mb-8">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <h2 className="text-xl font-bold">NEXA</h2>
-                  <div className="flex items-center space-x-2 bg-gray-800 px-3 py-1 rounded">
-                    <span className="text-gray-400">🌐</span>
-                    <span className="text-white">{websiteUrl}</span>
-                  </div>
+                <div className="flex items-center space-x-2 bg-gray-800 px-3 py-1 rounded">
+                  <span className="text-gray-400">🌐</span>
+                  <span className="text-white">{websiteUrl}</span>
                 </div>
                 <button 
                   onClick={resetToInput}
